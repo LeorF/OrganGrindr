@@ -9,5 +9,5 @@ reference: https://github.com/tomlandia/fuckr/blob/master/unofficial-grindr-api-
         "quantity": 150
     }, 
     "lat": 40.8227028,
-    "lon": -73.9518517
+    "lon": -74.005941
 }
