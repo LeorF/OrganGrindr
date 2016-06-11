@@ -8,6 +8,6 @@ reference: https://github.com/tomlandia/fuckr/blob/master/unofficial-grindr-api-
         "page": 1, 
         "quantity": 150
     }, 
-    "lat": 40.8227028,
+    "lat": 40.712784,
     "lon": -74.005941
 }
