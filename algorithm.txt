@@ -1,0 +1,18 @@
+/* 
+algorithm for organ_grindr:
+
+query:
+
+1.) get current location
+2.) build request (using location)
+3.) send request
+
+parser:
+
+4.) recieve response JSON
+5.) create distinct arrays for each relevant characteristic
+
+MIDI:
+
+6.) p5? midi.js?
+*/

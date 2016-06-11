@@ -1,0 +1,13 @@
+/*
+reference: https://github.com/tomlandia/fuckr/blob/master/unofficial-grindr-api-documentation.md
+*/
+
+{
+    "filter": {
+        "onlineOnly": true, 
+        "page": 1, 
+        "quantity": 150
+    }, 
+    "lat": 40.8227028,
+    "lon": -73.9518517
+}
