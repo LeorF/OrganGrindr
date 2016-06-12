@@ -42,7 +42,7 @@ app.post('/', function(request, response) {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
-		}
+		} 
 	};
 
 	var req = https.request(options, function(res) {
@@ -50,7 +50,9 @@ app.post('/', function(request, response) {
 		console.log('Headers: ' + JSON.stringify(res.headers));
 		res.setEncoding('utf8');
 		res.on('data', function (body) {
-		console.log('Body: ' + body);
+			console.log('Body: ' + body);
+			//TO DO: PUT THE DATA SOMEWHERE
+			res.render('/', {body:body});
 		});
 	});
 
@@ -101,8 +103,8 @@ console.log(res);
 /* 3.) send request object and recieve data */
 
 
-app.listen(4000);
-console.log('Started server on port 4000');
+app.listen(3600);
+console.log('Started server on port 3600');
 
 
 
