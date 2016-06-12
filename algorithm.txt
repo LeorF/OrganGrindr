@@ -1,4 +1,4 @@
-/* 
+  /* 
 algorithm for organ_grindr:
 
 query:
@@ -9,10 +9,10 @@ query:
 
 parser:
 
-4.) recieve response JSON
-5.) create distinct arrays for each relevant characteristic
+4.) recieve response JSON!
 
 MIDI:
 
-6.) p5? midi.js?
+5.) recieve an array of grindr users from the parser. p5
+
 */
