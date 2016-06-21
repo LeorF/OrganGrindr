@@ -17,12 +17,14 @@ app.set('view engine', 'handlebars');
 
 
 
+var gays = "";
 
 app.get('/', function(req, res){
-	res.render('index');
+	console.log("eyy!", gays);
+	res.render('index', {body:gays});
+	gays="";
 });
-
-app.post('/', function(request, response) {
+app.get('/getgays', function(request, response) {
 	console.log("posted!");
 	var querystring = require('querystring');
 	var data = JSON.stringify({
@@ -43,21 +45,24 @@ app.post('/', function(request, response) {
 		headers: {
 			'Content-Type': 'application/json'
 		} 
-	};
-
+	}; 
 	var req = https.request(options, function(res) {
+		//console.log(res);
 		console.log('Status: ' + res.statusCode);
 		console.log('Headers: ' + JSON.stringify(res.headers));
 		res.setEncoding('utf8');
 		res.on('data', function (body) {
-			console.log('Body: ' + body);
+			//console.log('Body: ' + body);
 			//TO DO: PUT THE DATA SOMEWHERE
-			res.render('/', {body:body});
+			gays += body;
+		});
+		res.on('end', function(body){
+			console.log('No more data in response.');
+			response.redirect("/");
 		});
 	});
-
 	req.write(data);
-	req.end();
+	req.end(); 
 });
 
 /* 1.) get current location*/
@@ -103,8 +108,8 @@ console.log(res);
 /* 3.) send request object and recieve data */
 
 
-app.listen(3600);
-console.log('Started server on port 3600');
+app.listen(3000);
+console.log('Started server on port 3000');
 
 
 
