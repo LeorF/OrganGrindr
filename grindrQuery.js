@@ -67,7 +67,6 @@ app.get('/getgays', function(request, response) {
 
 /* 1.) get current location*/
 
-
 /*
 from: http://www.w3schools.com/html/html5_geolocation.asp
 */
@@ -82,10 +81,10 @@ function getLocation() {
         return null; //location is not supported
     }
 }
+
 /* 2.) create JSON request object */
 
 if (pos === null){
-
 	var pos = [40.712784, -74.005941];
 }
 
@@ -110,7 +109,6 @@ console.log(res);
 
 app.listen(3000);
 console.log('Started server on port 3000');
-
 
 
 
