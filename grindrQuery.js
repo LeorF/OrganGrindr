@@ -16,22 +16,37 @@ app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
 
-
-var gays = "";
-
+var users = '';
+var ids = [];
+var userdata = "";
 app.get('/', function(req, res){
-	console.log("eyy!", gays);
-	res.render('index', {body:gays});
-	gays="";
+	console.log("get location!");
+	res.render('index');
+});
+
+app.post('/', function(req, res){
+	console.log(req.body.latitude);
+	console.log(req.body.longitude);
+	res.render('index');
+});
+
+/*
+app.get('/', function(req, res){
+	console.log("eyy!", users);
+	res.render('index', {body:users});
+	users="";
+	//redundant code???
 });
 app.get('/getgays', function(request, response) {
 	console.log("posted!");
+	
 	var querystring = require('querystring');
 	var data = JSON.stringify({
 		"filter": {
 			"onlineOnly": true, 
 			"page": 1, 
-			"quantity": 150
+			"quantity": 150,
+			"photoOnly": false
 		}, 
 		"lat": pos[0],
 		"lon": pos[1]
@@ -53,16 +68,30 @@ app.get('/getgays', function(request, response) {
 		res.setEncoding('utf8');
 		res.on('data', function (body) {
 			//console.log('Body: ' + body);
-			//TO DO: PUT THE DATA SOMEWHERE
-			gays += body;
+			users += body;
 		});
 		res.on('end', function(body){
 			console.log('No more data in response.');
-			response.redirect("/");
+			//users.replace(/\s/g,'');
+			jsonUsers = JSON.parse(users);
+			for (user in jsonUsers.profiles){
+				console.log(jsonUsers.profiles[user].profileId);
+				ids.push(user.profileId);
+				//here, look up each individual user in their own https request
+				//put the data in ids variable
+			}
+			response.render('index', {body:users});
+			users="";
+			//redundant code???
 		});
 	});
 	req.write(data);
 	req.end(); 
+});
+
+app.get('/getLocation', function(request, response){
+	console.log("location!");
+	response.render('location');
 });
 
 /* 1.) get current location*/
@@ -73,6 +102,7 @@ from: http://www.w3schools.com/html/html5_geolocation.asp
 
 /*
 Stretch goal: Make this work lol
+Maybe just make user input coordinates????
 function getLocation() {
     if (navigator.geolocation) {
         var pos = navigator.geolocation.getCurrentPosition(showPosition);
@@ -80,15 +110,11 @@ function getLocation() {
     } else {
         return null; //location is not supported
     }
-}
+}*/
 
 /* 2.) create JSON request object */
 
-if (pos === null){
-	var pos = [40.712784, -74.005941];
-}
 
-console.log(pos);
 /*
 2.) create JSON request object */
 /*
