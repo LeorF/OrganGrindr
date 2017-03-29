@@ -2,8 +2,9 @@ var https = require('https');
 var express = require('express');
 var app = express();
 var path = require("path");
+var geohash = require('latlon-geohash');
 
-var publicPath = path.resolve(__dirname, "views");
+var publicPath = path.resolve(__dirname, "public");
 app.use(express.static(publicPath));
 
 var bodyParser = require('body-parser');
@@ -13,8 +14,11 @@ var handlebars = require('express-handlebars')
 	.create({ defaultLayout:'main' });
 
 app.engine('handlebars', handlebars.engine);
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
+var viewsPublic = path.resolve(__dirname, "views");
+app.use(express.static(viewsPublic));
 
 var users = '';
 var ids = [];
@@ -27,6 +31,7 @@ app.get('/', function(req, res){
 app.post('/', function(req, res){
 	console.log(req.body.latitude);
 	console.log(req.body.longitude);
+	console.log(geohash.encode(req.body.latitude, req.body.longitude));
 	res.render('index');
 });
 
@@ -65,6 +70,7 @@ app.get('/getgays', function(request, response) {
 		//console.log(res);
 		console.log('Status: ' + res.statusCode);
 		console.log('Headers: ' + JSON.stringify(res.headers));
+		console.log(geohash.encode(req.body.latitude, req.body.longitude));
 		res.setEncoding('utf8');
 		res.on('data', function (body) {
 			//console.log('Body: ' + body);
@@ -122,19 +128,18 @@ reference: https://github.com/tomlandia/fuckr/blob/master/unofficial-grindr-api-
 */
 
 
-/*
-var req = new XMLHttpRequest();
+/*var req = new XMLHttpRequest();
 req.open("POST", "https://primus.grindr.com/2.0/nearbyProfiles");
 req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 var res = req.send(reqString);
-console.log(res);
-*/
+console.log(res);*/
+
+
 
 /* 3.) send request object and recieve data */
 
 
 app.listen(3000);
 console.log('Started server on port 3000');
-
 
 
